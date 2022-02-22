@@ -24,10 +24,13 @@ public class FacebookRegistrationModal extends WebElementUtils {
     private WebElement monthSelect;
     @FindBy(name = "birthday_year")
     private WebElement yearSelect;
-    @FindBy(xpath = "//span[@id='u_i_o_Fc']/span/input")
+    @FindBy(xpath = "//span[@class='_5k_3']/span")
     private List<WebElement> genderRadioBtns;
     @FindBy(name = "websubmit")
     private WebElement signUpBtn;
+    @FindBy(xpath = "//div[contains(@class, '_5dbb _5634')]")
+    private List<WebElement> requiredFileds;
+
     private Select days = new Select(daySelect);
     private Select months = new Select(monthSelect);
     private Select years = new Select(yearSelect);
@@ -61,6 +64,7 @@ public class FacebookRegistrationModal extends WebElementUtils {
             String genders = genderRadioBtns.get(i).getText();
             if(genders.equalsIgnoreCase(gender)){
                 click(genderRadioBtns.get(i));
+                break;
             }
         }
     }
@@ -77,5 +81,18 @@ public class FacebookRegistrationModal extends WebElementUtils {
         chooseMonth(month);
         chooseYear(year);
         chooseGender(gender);
+    }
+    public int getNumberOfRequiredFields(){
+        int number = requiredFileds.size();
+        return number;
+    }
+    public boolean warningIconNotdisplayed(){
+        boolean notDisplayed = false;
+        if(getNumberOfRequiredFields()!=0){
+            System.out.println("Please fill out the required fields");
+        }else{
+            notDisplayed=true;
+        }
+        return notDisplayed;
     }
 }

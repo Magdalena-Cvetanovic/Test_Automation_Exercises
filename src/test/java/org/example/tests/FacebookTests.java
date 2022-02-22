@@ -19,19 +19,22 @@ public class FacebookTests extends BaseTest {
         GoogleSearchResultsPage gsrp = new GoogleSearchResultsPage(driver);
         gsrp.clickFirstAlternativeLink();
         Assert.assertTrue(driver.getCurrentUrl().contains(searchCriteria));
-        FacebookHomePage fhp = new FacebookHomePage(driver);
-        fhp.openRegistration();
     }
     @Test(priority = 2)
     public void shouldTryEmptySignUp(){
+        FacebookHomePage fhp = new FacebookHomePage(driver);
+        fhp.openRegistration();
         FacebookRegistrationModal frm = new FacebookRegistrationModal(driver);
         frm.clickSignUp();
-        frm.fillOutRegistrationForm("Magi","Cat","magicat@mailinator.com","something",
-                "10","7", "1995","female");
+        System.out.println("The number of required fileds is "+ frm.getNumberOfRequiredFields());
 
     }
     @Test(priority = 3)
     public void shouldFillOutTheSignUp(){
+        FacebookRegistrationModal frm = new FacebookRegistrationModal(driver);
+        frm.fillOutRegistrationForm("Test","User","381 61 793285","something",
+                "1","7", "1980","male");
+        Assert.assertTrue(frm.warningIconNotdisplayed());
 
     }
 }
