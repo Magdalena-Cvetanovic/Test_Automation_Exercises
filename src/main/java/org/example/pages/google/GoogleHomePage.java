@@ -23,6 +23,6 @@ public class GoogleHomePage extends WebElementUtils {
     }
     public void conductSearch(String searchCriteria){
         enterSearchCriteria(searchCriteria);
-        click(googleSearchBtn);
+        clickSearchBtn();
     }
 }

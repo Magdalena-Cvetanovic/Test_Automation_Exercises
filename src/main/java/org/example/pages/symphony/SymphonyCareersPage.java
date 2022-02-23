@@ -15,11 +15,11 @@ public class SymphonyCareersPage extends WebElementUtils {
     public SymphonyCareersPage(WebDriver driver) {
         super(driver);
     }
+
     public int numberOfOpenJobs(String jobName){
         int counter = 0;
-        for (int i =0; i<listOfJobOpenings.size(); i++){
-            String job = listOfJobOpenings.get(i).getText();
-            if(job.contains(jobName)){
+        for(WebElement job : listOfJobOpenings){
+            if(job.getText().contains(jobName)){
                 counter++;
             }
         }

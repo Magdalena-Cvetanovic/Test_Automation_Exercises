@@ -59,12 +59,11 @@ public class FacebookRegistrationModal extends WebElementUtils {
     private void chooseYear(String year){
         years.selectByValue(year);
     }
-    private void chooseGender(String gender){
-        for (int i = 0; i<genderRadioBtns.size(); i++){
-            String genders = genderRadioBtns.get(i).getText();
-            if(genders.equalsIgnoreCase(gender)){
-                click(genderRadioBtns.get(i));
-                break;
+
+    public void chooseGender(String gender){
+        for (WebElement genderBtn : genderRadioBtns){
+            if(genderBtn.getText().equalsIgnoreCase(gender)){
+                click(genderBtn);
             }
         }
     }
@@ -81,6 +80,7 @@ public class FacebookRegistrationModal extends WebElementUtils {
         chooseMonth(month);
         chooseYear(year);
         chooseGender(gender);
+
     }
     public int getNumberOfRequiredFields(){
         int number = requiredFileds.size();

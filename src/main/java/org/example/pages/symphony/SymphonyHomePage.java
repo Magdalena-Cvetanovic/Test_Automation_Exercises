@@ -19,37 +19,35 @@ public class SymphonyHomePage extends WebElementUtils {
         super(driver);
     }
 
-    public void navigateTo(String link) {
-        for (int i = 0; i < navigationLinks.size(); i++) {
-            String linkName = navigationLinks.get(i).getText();
-            if (linkName.equalsIgnoreCase(link)) {
-                moveToElement(navigationLinks.get(i));
+    public void navigateTo(String link){
+        for (WebElement links : navigationLinks){
+            if(links.getText().equalsIgnoreCase(link)){
+                moveToElement(links);
+                break;
             }
         }
     }
-    private WebElement getCareerLink() {
-            WebElement carrerLink = null;
-            for (int i = 0; i < navigationLinks.size(); i++) {
-                String linkName = navigationLinks.get(i).getText();
-                if (linkName.contains("Careers")) {
-                    carrerLink = navigationLinks.get(i);
-                    break;
-                }
+    public WebElement getCareerLink(){
+        WebElement careerLink = null;
+        for(WebElement careerLinks : navigationLinks){
+            if(careerLinks.getText().contains("Careers")){
+                careerLink= careerLinks;
+                break;
             }
-            return carrerLink;
         }
+        return careerLink;
+    }
 
     private List<WebElement> getCareerSubNav(){
         List<WebElement> careerSubNav = getCareerLink().findElements(By.xpath("./div/ul/li"));
         return careerSubNav;
     }
-    public void chooseCareerSubNavLink(String link){
+
+    public void chooseCareerSubNavLink(String careerLink){
         List<WebElement> links = getCareerSubNav();
-        for (int i = 0; i<links.size(); i++){
-            String linkName = links.get(i).getText();
-            if(linkName.equalsIgnoreCase(link)){
-                click(links.get(i));
-                break;
+        for (WebElement link: links){
+            if(link.getText().equalsIgnoreCase(careerLink)){
+                click(link);
             }
         }
         checkIfPageIsReady();
